@@ -23,11 +23,10 @@ def contact(request):
             message = form.cleaned_data['message']
             email = form.cleaned_data['email']
 
-            recipients = [os.environ.get('USER_EMAIL')]
-            if subject and message and from_email:
+            recipients = [os.environ.get('EMAIL_HOST_USER')]
+            if subject and message and email:
                 try:
-                    send_mail(subject, message, email, recipients, fail_silently=True, 
-                    auth_password=os.environ.get('USER_PASSWORD'))
+                    send_mail(subject, message, email, recipients, fail_silently=True)
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
 

@@ -6,6 +6,7 @@ from django.urls import reverse
 
 class Profile(models.Model):
     full_name = models.CharField(max_length=50)
+    job = models.CharField(max_length=30)
     describe_yourself = models.CharField(max_length=255)
 
     def __str__(self):
