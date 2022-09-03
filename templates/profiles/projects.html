@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    {{ block.super }} - Projects
+{% endblock title %}
+
+{% block content %}
+    <main class="projects display-center">
+        <div class="container">
+            <h4 class="text-muted">Projects</h4>
+            <div class="divider mx-1 mb-4"></div>
+            <div class="row">
+                {% for project in projects %}
+                <div class="col-lg-4">
+                    <div class="card bg-transparent text-white">
+                        <div class="card-header">
+                            <h4><a href="{{ project.get_absolute_url }}" class="project-link">{{ project.title }}</a></h4>
+                        </div>
+                        <div class="card-body">
+                            {{ project.highlight }}
+                        </div>
+                        <div class="card-footer row">
+                            <div class="col-6">
+                                <a href="{{ project.demo }}" class="btn btn-outline-secondary">Live</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{{ project.code }}" class="btn btn-outline-secondary">Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock content %}

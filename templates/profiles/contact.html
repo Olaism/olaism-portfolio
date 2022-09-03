@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{ block.super }} - Get in touch
+{% endblock title %}
+
+{% block content %}
+    <main class="contact display-center text-white">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-4 border-section mb-4">
+                    <h4 class="text-muted">Get in touch</h4>
+                    <div class="divider mx-1"></div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-10 col-md-8 col-lg-6">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-info">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

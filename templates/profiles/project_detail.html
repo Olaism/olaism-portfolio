@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    {{ block.super }} - {{ project.title }}
+{% endblock title %}
+
+{% block content %}
+    <main class="text-white">
+        <div class="container">
+            <h2 class="mb-0">{{ project.title }}</h2>
+            <p class="mt-0 mb-4 fw-lighter">{{ project.program }}</p>
+            {% if project.demo %}
+                <a href="{{ project.demo }}" class="btn btn-primary btn-sm">View Live</a>
+            {% else %}
+                <a href="{{ project.code }}" class="btn btn-primary btn-sm">View Code</a>
+            {% endif %}
+            <p class="mt-4">Description</p>
+            <p>{{ project.highlight }}</p>
+            <p class="mt-4">Details</p>
+            <p>{{ project.get_details_as_markdown }}</p>
+        </div>
+    </main>
+{% endblock content %}

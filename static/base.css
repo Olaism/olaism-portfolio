@@ -1,3 +1,7 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans&display=swap');
+
+
 /*
  * Globals
  */
@@ -20,12 +24,28 @@ body {
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
   background-color: #08192f;
+  font-family: 'Noto Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
   width: 100%;
   margin: 0 auto;
   max-width: 900px;
+}
+
+.divider {
+  width: 5rem;
+  height: 4px;
+  background-color: #db2777;
+  display: block;
+}
+
+nav {
+  margin-bottom: 2em;
+}
+
+nav .navbar-brand {
+  font-family: 'Dancing Script', cursive;
 }
 
 main {
@@ -80,11 +100,44 @@ main .btn-project:hover {
   color: #db2777;
 }
 
-/* main.display-center > .container {
+/* About */
+
+main .about-intro {
+  font-size: 2rem;
+}
+
+/* Skills */
+
+main .skills-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 100px;
+  gap: 10px;
+}
+
+main .skill-card {
+  box-shadow: 0px 0px 10px #040C16;
   display: flex;
-  justify-content: cnt;
-} */
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* projects */
+
+main.projects .card {
+  box-shadow: 0 0 10px #040C16;
+}
+
+main.projects .project-link {
+  text-decoration: none;
+  color: inherit;
+}
 
 footer {
   min-height: 50px;
+}
+
+footer .container {
+  border-top: 1px solid #122c4b;
 }

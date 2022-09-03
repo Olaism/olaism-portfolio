@@ -1,6 +1,6 @@
 import os
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 
 from .models import (
@@ -12,7 +12,8 @@ from .models import (
 from .forms import ContactForm
 
 def home(request):
-    return render(request, 'profiles/home.html')
+    profile = Profile.objects.first()
+    return render(request, 'profiles/home.html', {'profile': profile})
 
 def contact(request):
     if request.method == 'POST':
@@ -36,10 +37,10 @@ def contact(request):
 
     else:
         form = ContactForm()
-    return render(request, 'profiles/contact.html', {'contact': contact})
+    return render(request, 'profiles/contact.html', {'form': form})
 
 def about(request):
-    about = About.objects.all()
+    about = About.objects.first()
     return render(request, 'profiles/about.html', {'about': about})
 
 def skills(request):
@@ -49,3 +50,7 @@ def skills(request):
 def projects(request):
     projects = Project.objects.all()
     return render(request, 'profiles/projects.html', {'projects': projects})
+
+def project_detail(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    return render(request, 'profiles/project_detail.html', {'project': project})

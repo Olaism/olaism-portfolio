@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    {{ block.super }} - About me
+{% endblock title %}
+
+{% block content %}
+    <main class="about display-center">
+        <div class="container text-white">
+            <h4>About Me</h4>
+            <div class="divider mb-4"></div>
+            <div class="row align-items-end">
+                <div class="col-lg-6 text-end">
+                    <p class="about-intro">{{ about.heading }}</p>
+                </div>
+                <div class="col-lg-6 lh-lg fw-light">
+                    <p>{{ about.details }}</p>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock content %}

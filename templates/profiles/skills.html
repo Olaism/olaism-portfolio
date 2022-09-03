@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block title %}
+    {{ block.super }} - Skills
+{% endblock title %}
+
+{% block content %}
+    <main class="skills text-white display-center">
+        <div class="container">
+            <h4>Skills, Tools and Technologies</h4>
+            <div class="divider mx-1 mb-4"></div>
+            <div class="skills-card">
+                {% for skill in skills %}
+                    <div class="skill-card">
+                        {% if skill.class_name %}
+                            <i class="{{ skill.class_name}}"></i>
+                        {% endif %}
+                        <h5>{{ skill.name }}</h5>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock content %}
