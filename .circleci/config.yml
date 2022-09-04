@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  heroku: circleci/heroku@1.2.6
+
 jobs:
   build:
     docker:
@@ -31,9 +34,32 @@ jobs:
             . venv/bin/activate
             python3 manage.py test
 
+  deploy_project:
+    executor: heroku/default
+    parameters:
+      app-name:
+        default: $HEROKU_APP_NAME
+        description: The name of the heroku app
+        type: string
+    steps:
+      - heroku/install
+      - heroku/check-authentication
+      - checkout
+      - run:
+          command: |
+            heroku container:push web -a ${HEROKU_APP_NAME}
+      - run:
+          command: |
+            heroku container:release web -a ${HEROKU_APP_NAME}
+
 workflows:
   default:
     jobs:
       - build
       - test:
           requires: [build]
+      - deploy_project:
+          requires: [build, test]
+          filters:
+            branches:
+              only: ['deploy']
