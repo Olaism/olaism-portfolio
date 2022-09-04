@@ -12,7 +12,7 @@
             <div class="row">
                 {% for project in projects %}
                 <div class="col-lg-4">
-                    <div class="card bg-transparent text-white">
+                    <div class="card bg-transparent text-white my-3">
                         <div class="card-header">
                             <h4><a href="{{ project.get_absolute_url }}" class="project-link">{{ project.title }}</a></h4>
                         </div>
@@ -20,12 +20,16 @@
                             {{ project.highlight }}
                         </div>
                         <div class="card-footer row">
+                            {% if project.demo %}
                             <div class="col-6">
-                                <a href="{{ project.demo }}" class="btn btn-outline-secondary">Live</a>
+                                    <a href="{{ project.demo }}" class="btn btn-outline-secondary">Live</a>
                             </div>
+                            {% endif %}
+                            {% if project.code %}
                             <div class="col-6">
-                                <a href="{{ project.code }}" class="btn btn-outline-secondary">Code</a>
+                                    <a href="{{ project.code }}" class="btn btn-outline-secondary">Code</a>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

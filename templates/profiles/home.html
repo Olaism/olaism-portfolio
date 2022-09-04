@@ -9,11 +9,11 @@
         <div class="container">
             <h5 class="name-intro">Hi, my name is</h5>
             <h1 class="display-4 profile-name">{{ profile.full_name }}</h1>
-            <h2 class="profile-stack">I'm a backend developer</h2>
+            <h2 class="profile-stack">I'm a {{ profile.job }}</h2>
             <p class="profile-intro">
                 {{ profile.describe_yourself }}
             </p>
-            <button class="btn btn-project">View Projects</button>
+            <a href="{% url 'projects' %}" class="btn btn-info text-white">View Projects</a>
         </div>
     </main>
 {% endblock content %}
