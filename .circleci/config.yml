@@ -24,6 +24,7 @@ jobs:
       - restore_cache:
           key: deps1-{{ .Branch }}-{{ checksum "Pipfile" }}
       - run:
+          pipenv shell
           python3 manage.py test
 
 workflows:
