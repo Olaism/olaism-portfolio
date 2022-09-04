@@ -62,4 +62,4 @@ workflows:
           requires: [build, test]
           filters:
             branches:
-              only: ['deploy']
+              only: ['master']
