@@ -45,12 +45,10 @@ jobs:
       - heroku/install
       - heroku/check-authentication
       - checkout
-      - run:
-          command: |
-            heroku container:push web -a ${HEROKU_APP_NAME}
-      - run:
-          command: |
-            heroku container:release web -a ${HEROKU_APP_NAME}
+      - heroku/push-docker-image:
+          app-name: << parameters.app-name >>
+      - heroku/release-docker-image:
+          app-name: << parameters.app-name >>
 
 workflows:
   default:
