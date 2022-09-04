@@ -7,13 +7,13 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: deps1-{{ .Branch }}-{{ checksum "Pipfile" }}
       - run:
           name: Install dependencies
           command: |
             pip install pipenv && pipenv install --system
       - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: deps1-{{ .Branch }}-{{ checksum "Pipfile" }}
           paths:
             - "venv"
   test:
@@ -22,7 +22,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: deps1-{{ .Branch }}-{{ checksum "Pipfile" }}
       - run:
           python3 manage.py test
 
@@ -30,3 +30,5 @@ workflows:
   default:
     jobs:
       - build
+      - test:
+          requires: [build]
