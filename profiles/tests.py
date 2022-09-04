@@ -1,8 +1,10 @@
+from django.core import mail
 from django.test import TestCase
 from django.urls import reverse, resolve
 from django.views.generic import TemplateView
 
 from . import views
+from .forms import ContactForm
 from .models import Profile, About, Skill, Project
 
 class ProfilesSetUpTestCase(TestCase):
@@ -270,6 +272,10 @@ class ContactGetHomeViewTest(TestCase):
     def test_has_csrf_protection(self):
         self.assertContains(self.response, 'csrfmiddlewaretoken')
 
+    def test_contains_forms(self):
+        form = self.response.context.get('form')
+        self.assertIsinstance(form, contactForm)
+
     def test_form_inputs(self):
         self.assertContains(self.response, '<input type="email" ', 1)
         self.assertContains(self.response, '<input type="text" ', 1)
@@ -302,6 +308,9 @@ class SuccessfulContactPostTestCase(TestCase):
     def test_redirect(self):
         success_link = '/contact/thanks/'
         self.assertRedirects(self.response, success_link)
+
+    def test_send_mail(self):
+        self.assertEqual(len(mail.outbox), 1)
 
 class UnsuccessfulContactPostTestCase(TestCase):
 

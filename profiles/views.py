@@ -21,12 +21,11 @@ def contact(request):
         if form.is_valid():
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
-            email = form.cleaned_data['email']
+            your_email = form.cleaned_data['your_email']
 
-            recipients = [os.environ.get('EMAIL_HOST_USER')]
-            if subject and message and email:
+            if subject and message and your_email:
                 try:
-                    send_mail(subject, message, email, recipients, fail_silently=True)
+                    send_mail(subject, message, your_email, [os.environ.get('EMAIL_HOST_USER')])
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
 
