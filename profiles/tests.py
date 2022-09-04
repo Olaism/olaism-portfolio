@@ -274,7 +274,7 @@ class ContactGetHomeViewTest(TestCase):
 
     def test_contains_forms(self):
         form = self.response.context.get('form')
-        self.assertIsinstance(form, contactForm)
+        self.assertIsInstance(form, ContactForm)
 
     def test_form_inputs(self):
         self.assertContains(self.response, '<input type="email" ', 1)
@@ -302,7 +302,7 @@ class SuccessfulContactPostTestCase(TestCase):
         self.response = self.client.post(url, {
             'subject': 'Subject', 
             'message': 'This is my message', 
-            'email': 'testuser01@gmail.com'
+            'your_email': 'testuser01@gmail.com'
         })
 
     def test_redirect(self):
@@ -319,7 +319,7 @@ class UnsuccessfulContactPostTestCase(TestCase):
         self.response = self.client.post(url, {
             'subject': 'My Subject',
             'message': 'This is my message',
-            'email': 'Olaism'
+            'your_email': 'Olaism'
         })
 
     def test_status_code(self):
@@ -336,7 +336,7 @@ class InvalidContactPostTestCase(TestCase):
         self.response = self.client.post(url, {
             'subject': '',
             'message': '',
-            'email': ''
+            'your_email': ''
         })
 
     def test_status_code(self):
