@@ -34,21 +34,28 @@ jobs:
             . venv/bin/activate
             python3 manage.py test
 
-  deploy_project:
-    executor: heroku/default
-    parameters:
-      app-name:
-        default: $HEROKU_APP_NAME
-        description: The name of the heroku app
-        type: string
-    steps:
-      - heroku/install
-      - heroku/check-authentication
-      - checkout
-      - heroku/push-docker-image:
-          app-name: << parameters.app-name >>
-      - heroku/release-docker-image:
-          app-name: << parameters.app-name >>
+  # deploy_project:
+  #   executor: heroku/default
+  #   parameters:
+  #     app-name:
+  #       default: $HEROKU_APP_NAME
+  #       description: The name of the heroku app
+  #       type: string
+  #   steps:
+  #     - heroku/install
+  #     - heroku/check-authentication
+  #     - checkout
+  #     - run:
+  #         command: |
+  #           heroku container:login
+  #     - run:
+  #         name: "Push web content to docker image registry"
+  #         command: |
+  #           heroku container:push web -a ${HEROKU_APP_NAME}
+  #     - run:
+  #         name: "Release web content to docker image registry"
+  #         command: |
+  #           heroku container:release web -a ${HEROKU_APP_NAME}
 
 workflows:
   default:
@@ -56,8 +63,8 @@ workflows:
       - build
       - test:
           requires: [build]
-      - deploy_project:
-          requires: [build, test]
-          filters:
-            branches:
-              only: ['master']
+      # - deploy_project:
+      #     requires: [build, test]
+      #     filters:
+      #       branches:
+      #         only: ['master']
